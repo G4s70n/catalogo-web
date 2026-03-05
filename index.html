@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta property="og:title" content="Deco & Luminarias">
+<meta property="og:description" content="Iluminamos tu diseño.">
+<meta property="og:url" content="https://g4s70n.github.io/prueba_/">
+<meta property="og:image" content="https://g4s70n.github.io/prueba_/preview.png">
+<meta property="og:type" content="website">
+
+<title>Deco & Luminarias</title>
+<style>
+/* Reseteos y estilos globales */
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+body {
+        /* Degradado más pronunciado: tonos café/cobrizo oscuro en el centro que se funden a negro puro */
+        background: radial-gradient(circle at 50% 35%, #352012 0%, #180c06 35%, #050302 65%, #000000 100%);
+        color: #ffffff;
+        font-family: 'Arial', sans-serif;
+        overflow-x: hidden;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 100vh;
+    }
+
+    h1, h2, h3, h4, h5, h6, .section-title, .products-title {
+        font-family: 'Georgia', serif;
+    }
+
+    /* ----- HEADER (Desktop) ----- */
+    header {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 30px 60px;
+        z-index: 50;
+    }
+
+    /* Botón de Inicio igualado al resto de los links */
+    .nav-inicio {
+        color: #b3b3b3;
+        text-decoration: none;
+        font-size: 11px;
+        font-weight: normal; /* Sin negrita */
+        letter-spacing: 0.5px;
+        transition: color 0.3s ease;
+        display: flex;
+        align-items: center;
+    }
+
+    .nav-inicio:hover {
+        color: #ffffff;
+    }
+
+    nav ul {
+        list-style: none;
+        display: flex;
+        align-items: center;
+        gap: 25px;
+    }
+
+    nav ul li {
+        display: flex;
+        align-items: center;
+    }
+
+    nav ul li a {
+        color: #b3b3b3;
+        text-decoration: none;
+        font-size: 11px;
+        letter-spacing: 0.5px;
+        transition: color 0.3s ease;
+        display: flex;
+        align-items: center;
+    }
+
+    nav ul li a:hover {
+        color: #ffffff;
+    }
+
+    .icon-instagram {
+        width: 18px;
+        height: 18px;
+        fill: #b3b3b3;
+        transition: fill 0.3s ease;
+    }
+
+    .icon-instagram:hover {
+        fill: #ffffff;
+    }
+
+    /* ----- CONTENEDOR DE LA LAMPARA Y LUZ ----- */
+    .stage-container {
+        position: relative;
+        width: 100vw;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 60px; 
+        flex-grow: 1; /* Permite que el contenido ocupe el espacio disponible */
+    }
+
+    /* La Lampara SVG */
+    .lamp-wrapper {
+        position: relative;
+        width: 380px;
+        height: 250px;
+        z-index: 10;
+    }
+
+    .lamp-svg {
+        width: 100%;
+        height: 100%;
+        display: block;
+    }
+
+    /* Haz de luz */
+    .beam-wrapper {
+        position: absolute;
+        top: 205px; 
+        left: 0;
+        width: 100%;
+        bottom: 0; /* Anclado al fondo de la página, evita generar scroll extra */
+        z-index: 12; 
+        filter: blur(18px); 
+        pointer-events: none;
+        mix-blend-mode: screen; 
+    }
+
+    .light-beam {
+        width: 100%;
+        height: 100%;
+        clip-path: polygon(calc(50% - 138px) 0, calc(50% + 138px) 0, 150% 100%, -50% 100%);
+        background: linear-gradient(to bottom, 
+            rgba(255, 235, 185, 0) 0px, 
+            rgba(255, 235, 185, 0.95) 35px, 
+            rgba(255, 205, 135, 0.5) 250px, 
+            rgba(230, 165, 95, 0.12) 55%, 
+            transparent 85%);
+    }
+
+    /* ----- CONTENIDO PRINCIPAL ILUMINADO ----- */
+    .content-container {
+        position: relative;
+        z-index: 20;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        margin-top: 40px; 
+        margin-bottom: 60px; /* Separación limpia con el footer */
+    }
+
+    .main-logo-container {
+        width: 260px;
+        height: 260px;
+        margin-bottom: 30px;
+    }
+
+    .main-logo-container svg {
+        width: 100%;
+        height: 100%;
+    }
+
+    h1 {
+        font-family: 'Georgia', serif;
+        font-size: 32px;
+        font-weight: 400;
+        letter-spacing: 2px;
+        margin-bottom: 20px;
+        text-shadow: 0px 4px 10px rgba(0,0,0,0.6);
+    }
+
+    p {
+        color: #d1d1d1;
+        font-size: 12px;
+        line-height: 1.6;
+        letter-spacing: 0.5px;
+        max-width: 420px;
+        margin-bottom: 35px;
+    }
+
+    .mobile-text {
+        display: none;
+    }
+
+    button {
+        background-color: #c48b5c;
+        color: #ffffff;
+        border: none;
+        padding: 14px 28px;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+
+    button:hover {
+        background-color: #a87245;
+        transform: scale(1.02);
+    }
+
+    /* ----- FOOTER ----- */
+    footer {
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.4);
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        padding: 30px 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        margin-top: auto;
+        z-index: 30;
+    }
+
+    footer p {
+        margin: 0;
+        color: #888888;
+        font-size: 10px;
+        letter-spacing: 0.5px;
+        text-align: center;
+        font-family: 'Arial', sans-serif;
+    }
+
+    footer a {
+        color: #c48b5c;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    footer a:hover {
+        color: #ffffff;
+    }
+
+    /* ----- ANIMACION DE ENCENDIDO FLUORESCENTE ----- */
+    .flicker-target {
+        opacity: 0;
+        animation: fluorescent-flicker 2.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        animation-delay: 0.5s; 
+    }
+
+    @keyframes fluorescent-flicker {
+        0% { opacity: 0; }
+        15% { opacity: 0; }
+        18% { opacity: 0.6; } 
+        20% { opacity: 0; }
+        28% { opacity: 0; }
+        30% { opacity: 0.8; } 
+        33% { opacity: 0.1; }
+        40% { opacity: 0.1; }
+        42% { opacity: 1; }
+        45% { opacity: 0.2; }
+        50% { opacity: 0.2; }
+        55% { opacity: 1; } 
+        60% { opacity: 0.7; }
+        65% { opacity: 1; }
+        70% { opacity: 0.85; }
+        75% { opacity: 1; }
+        100% { opacity: 1; }
+    }
+
+    /* ----- RESPONSIVE (Version Mobile) ----- */
+    @media (max-width: 768px) {
+        header {
+            position: relative; 
+            flex-direction: row; /* Todo en la misma fila */
+            justify-content: center;
+            align-items: center;
+            padding: 20px 10px 10px 10px;
+            gap: 15px; /* Separación general */
+            width: 100%;
+        }
+
+        nav ul {
+            justify-content: center;
+            flex-wrap: nowrap; /* Impide saltos de línea */
+            gap: 15px; /* Tienen el mismo gap que el contenedor principal para que se vea parejo */
+        }
+
+        .nav-inicio, nav ul li a {
+            white-space: nowrap; /* Obliga a las palabras a no cortarse */
+        }
+
+        .stage-container {
+            margin-top: 10px; 
+        }
+
+        .lamp-wrapper {
+            width: 260px;
+            height: 170px;
+        }
+
+        .beam-wrapper {
+            top: 135px;
+            filter: blur(15px);
+        }
+
+        .light-beam {
+            clip-path: polygon(calc(50% - 95px) 0, calc(50% + 95px) 0, 160% 100%, -60% 100%);
+            background: linear-gradient(to bottom, 
+                rgba(255, 235, 185, 0) 0px, 
+                rgba(255, 235, 185, 0.95) 30px, 
+                rgba(255, 205, 135, 0.5) 180px, 
+                rgba(230, 165, 95, 0.12) 50%, 
+                transparent 80%);
+        }
+
+        .content-container {
+            margin-top: 20px; 
+            margin-bottom: 40px;
+        }
+
+        .main-logo-container {
+            width: 200px;
+            height: 200px;
+            margin-bottom: 25px;
+        }
+
+        h1 {
+            font-size: 26px;
+            margin-bottom: 15px;
+        }
+
+        .desktop-text {
+            display: none;
+        }
+
+        .mobile-text {
+            display: block;
+            font-size: 11px;
+            padding: 0 20px;
+            max-width: 320px;
+        }
+
+        button {
+            padding: 12px 24px;
+        }
+    }
+</style>
+</head>
+<body>
+
+<header>
+    <a href="index.html" class="nav-inicio">Inicio</a>
+    <nav>
+        <ul>
+            <li><a href="productos.html">Productos</a></li>
+            <li><a href="ubicacion.html">Ubicación</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+            <li>
+                <a href="https://www.instagram.com/deco_luminarias" target="_blank" aria-label="Síguenos en Instagram">
+                    <svg class="icon-instagram" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                    </svg>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+<main class="stage-container">
+    
+    <div class="lamp-wrapper">
+        <svg class="lamp-svg" viewBox="0 0 400 250" style="overflow: visible;" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <radialGradient id="metal-dome" cx="50%" cy="30%" r="70%" fx="50%" fy="20%">
+                    <stop offset="0%" stop-color="#ffe6cc"/>
+                    <stop offset="25%" stop-color="#d69261"/>
+                    <stop offset="60%" stop-color="#542811"/>
+                    <stop offset="90%" stop-color="#140803"/>
+                    <stop offset="100%" stop-color="#0a0301"/>
+                </radialGradient>
+                
+                <linearGradient id="metal-base" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0%" stop-color="#0f0704"/>
+                    <stop offset="30%" stop-color="#915934"/>
+                    <stop offset="50%" stop-color="#ffceaa"/>
+                    <stop offset="70%" stop-color="#915934"/>
+                    <stop offset="100%" stop-color="#0f0704"/>
+                </linearGradient>
+
+                <radialGradient id="inner-glow" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stop-color="#ffffff"/>
+                    <stop offset="35%" stop-color="#ffe6bd"/>
+                    <stop offset="70%" stop-color="#cf7f3a"/>
+                    <stop offset="100%" stop-color="#3d1e0a"/>
+                </radialGradient>
+            </defs>
+
+            <rect x="195" y="-100" width="10" height="145" fill="#181818" />
+            <rect x="196.5" y="-100" width="2.5" height="145" fill="#8c8c8c" />
+            <rect x="203" y="-100" width="1.5" height="145" fill="#080808" />
+            
+            <rect x="192" y="40" width="16" height="25" rx="1" fill="url(#metal-base)" />
+            <rect x="184" y="60" width="32" height="11" rx="2" fill="url(#metal-base)" />
+
+            <path d="M 50 220 A 150 150 0 0 1 350 220 Z" fill="url(#metal-dome)" />
+            
+            <ellipse cx="200" cy="220" rx="150" ry="26" fill="#140803" />
+            
+            <ellipse cx="200" cy="220" rx="146" ry="23" fill="url(#inner-glow)" class="flicker-target" />
+        </svg>
+    </div>
+
+    <div class="beam-wrapper">
+        <div class="light-beam flicker-target"></div>
+    </div>
+
+    <div class="content-container flicker-target">
+        
+        <div class="main-logo-container">
+            <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <path id="top-text-path-main" d="M 35 150 A 115 115 0 0 1 265 150" />
+                    <path id="bottom-text-path-main" d="M 35 150 A 115 115 0 0 0 265 150" />
+                    
+                    <filter id="realistic-shadow-stylized" x="-50%" y="-50%" width="200%" height="200%">
+                        <feGaussianBlur in="SourceAlpha" stdDeviation="2" result="blur1"/>
+                        <feOffset in="blur1" dx="0" dy="4" result="offsetBlur1"/>
+                        <feFlood flood-color="#1a0d05" flood-opacity="0.85" result="color1"/>
+                        <feComposite in="color1" in2="offsetBlur1" operator="in" result="shadow1"/>
+
+                        <feGaussianBlur in="SourceAlpha" stdDeviation="5" result="blur2"/>
+                        <feOffset in="blur2" dx="0" dy="8" result="offsetBlur2"/>
+                        <feFlood flood-color="#4a2c15" flood-opacity="0.4" result="color2"/>
+                        <feComposite in="color2" in2="offsetBlur2" operator="in" result="shadow2"/>
+
+                        <feMerge>
+                            <feMergeNode in="shadow2"/>
+                            <feMergeNode in="shadow1"/>
+                            <feMergeNode in="SourceGraphic"/>
+                        </feMerge>
+                    </filter>
+                </defs>
+                
+                <g filter="url(#realistic-shadow-stylized)">
+                    <circle cx="150" cy="150" r="146" fill="none" stroke="white" stroke-width="4"/>
+                    <path d="M 33 110 A 122 122 0 0 0 33 190" fill="none" stroke="white" stroke-width="2.5"/>
+                    <path d="M 267 110 A 122 122 0 0 1 267 190" fill="none" stroke="white" stroke-width="2.5"/>
+                    <text fill="white" font-family="Arial, sans-serif" font-size="14.5" font-weight="bold" letter-spacing="3.5">
+                        <textPath href="#top-text-path-main" startOffset="50%" text-anchor="middle">DECO &amp; LUMINARIAS</textPath>
+                    </text>
+                    <text fill="white" font-family="Arial, sans-serif" font-size="14.5" font-weight="bold" letter-spacing="3.5">
+                        <textPath href="#bottom-text-path-main" startOffset="50%" text-anchor="middle" dy="10">ILUMINAMOS TU DISEÑO</textPath>
+                    </text>
+                    <text x="150" y="178" font-family="Georgia, serif" fill="white" text-anchor="middle" font-weight="bold">
+                        <tspan font-size="95">D</tspan>
+                        <tspan font-size="60" dx="-10">&amp;</tspan>
+                        <tspan font-size="95" dx="-8">L</tspan>
+                    </text>
+                </g>
+            </svg>
+        </div>
+
+        <h1>ILUMINAMOS TU DISEÑO</h1>
+        
+        <p class="desktop-text">
+            Contamos con más de 10 años de experiencia en instalaciones eléctricas y luminarias.<br>
+            Creamos atmósferas únicas con nuestra exclusiva selección de decoración y fragancias de autor.
+        </p>
+        
+        <p class="mobile-text">
+            Más de 10 años de experiencia en electricidad.<br>
+            Iluminación, decoración y fragancias de autor<br>
+            para crear ambientes inolvidables.
+        </p>
+
+        <a href="productos.html"><button>VER PRODUCTOS</button></a
+       
+
+    </div>
+</main>
+
+<footer>
+    <p>Contacto: <a>3549-433565</a></p>
+    <p>Ubicación: 3 de Febrero, Cruz del Eje, Córdoba.</p>
+    <p>&copy; 2026 Deco & Luminarias. Todos los derechos reservados.</p>
+</footer>
+</body>
+</html>
+

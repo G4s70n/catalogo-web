@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Productos - Deco & Luminarias</title>
+
+<meta property="og:title" content="Catálogo de Productos - Deco & Luminarias">
+<meta property="og:description" content="Descubre nuestra exclusiva línea de iluminación. Lámparas de cristal, bases de mármol y más.">
+<meta property="og:image" content="https://acdn-us.mitiendanube.com/stores/005/062/789/products/18-x-10-copia-7350f8c906962d70dd17367963061071-1024-1024.webp">
+<meta property="og:url" content="https://luminariasdeco63-spec.github.io/catalogo-web/productos.html">
+<meta property="og:type" content="website">
+
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: radial-gradient(circle at 50% 35%, #352012 0%, #180c06 35%, #050302 65%, #000000 100%); background-attachment: fixed; color: #ffffff; font-family: 'Arial', sans-serif; overflow-x: hidden; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+h1, h2, h3, h4, h5, h6, .section-title, .products-title { font-family: 'Georgia', serif; }
+header { position: absolute; top: 0; left: 0; width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 30px 60px; z-index: 50; }
+.nav-inicio { color: #b3b3b3; text-decoration: none; font-size: 11px; font-weight: normal; letter-spacing: 0.5px; transition: color 0.3s ease; display: flex; align-items: center; }
+.nav-inicio:hover { color: #ffffff; }
+nav ul { list-style: none; display: flex; align-items: center; gap: 25px; }
+nav ul li { display: flex; align-items: center; }
+nav ul li a { color: #b3b3b3; text-decoration: none; font-size: 11px; letter-spacing: 0.5px; transition: color 0.3s ease; display: flex; align-items: center; }
+nav ul li a:hover { color: #ffffff; }
+.icon-instagram { width: 18px; height: 18px; fill: #b3b3b3; transition: fill 0.3s ease; }
+.icon-instagram:hover { fill: #ffffff; }
+.products-section { width: 100%; max-width: 1200px; padding: 120px 20px 40px 20px; flex-grow: 1; }
+.products-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px; flex-wrap: wrap; gap: 20px; }
+.products-title { font-family: 'Georgia', serif; font-size: 24px; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; color: #ffffff; }
+.search-container { position: relative; width: 100%; max-width: 300px; }
+.search-input { width: 100%; padding: 12px 20px; padding-right: 40px; background-color: rgba(255, 255, 255, 0.05); border: 1px solid rgba(196, 139, 92, 0.5); border-radius: 25px; color: #ffffff; font-size: 14px; outline: none; transition: border-color 0.3s ease, box-shadow 0.3s ease; }
+.search-input::placeholder { color: #888; }
+.search-input:focus { border-color: #c48b5c; box-shadow: 0 0 10px rgba(196, 139, 92, 0.2); }
+.search-icon { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); fill: #888; width: 16px; height: 16px; pointer-events: none; }
+.products-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 25px; }
+.product-card { background-color: #1a1a1a; border: 1px solid #333; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+.product-card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6); border-color: #4a3b2c; }
+.product-image-container { width: 100%; aspect-ratio: 1 / 1; background-color: transparent; display: flex; align-items: center; justify-content: center; overflow: hidden; padding: 15px; }
+.product-image-container img { width: 100%; height: 100%; object-fit: contain; }
+.product-info { padding: 20px 15px; display: flex; flex-direction: column; flex-grow: 1; }
+.product-brand { color: #c48b5c; font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 6px; font-weight: bold; display: block; }
+.product-name { font-size: 15px; font-weight: normal; color: #ffffff; margin-bottom: 8px; }
+.product-price { font-size: 18px; font-weight: bold; color: #ffffff; margin-bottom: 4px; }
+.product-code { font-size: 11px; color: #888; margin-bottom: 18px; }
+.btn-consultar { margin-top: auto; background-color: #a87b51; color: #ffffff; border: none; border-radius: 6px; padding: 10px; font-size: 11px; font-weight: 600; letter-spacing: 1px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: background-color 0.3s ease; text-decoration: none; }
+.btn-consultar:hover { background-color: #8f6742; }
+.btn-consultar svg { width: 14px; height: 14px; fill: #ffffff; }
+footer { width: 100%; background-color: rgba(0, 0, 0, 0.4); border-top: 1px solid rgba(255, 255, 255, 0.05); padding: 30px 20px; display: flex; flex-direction: column; align-items: center; gap: 10px; margin-top: auto; z-index: 30; }
+footer p { margin: 0; color: #888888; font-size: 10px; letter-spacing: 0.5px; text-align: center; font-family: 'Arial', sans-serif; }
+footer a { color: #c48b5c; text-decoration: none; transition: color 0.3s ease; }
+footer a:hover { color: #ffffff; }
+@media (max-width: 1024px) { .products-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 768px) { header { position: relative; flex-direction: row; justify-content: center; align-items: center; padding: 20px 10px 10px 10px; gap: 15px; width: 100%; } nav ul { justify-content: center; flex-wrap: nowrap; gap: 15px; } .nav-inicio, nav ul li a { white-space: nowrap; } .products-section { padding-top: 20px; } .products-header { flex-direction: column; align-items: center; justify-content: center; } .products-title { text-align: center; margin-bottom: 20px; } .search-container { max-width: 100%; } .products-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; } }
+@media (max-width: 480px) { .products-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; } .product-info { padding: 12px 10px; } .product-brand { font-size: 9px; margin-bottom: 4px; } .product-name { font-size: 13px; margin-bottom: 5px; } .product-price { font-size: 15px; } .product-code { font-size: 10px; margin-bottom: 12px; } .btn-consultar { padding: 8px; font-size: 10px; } .btn-consultar svg { width: 12px; height: 12px; } }
+</style>
+</head>
+<body>
+
+<header>
+    <a href="index.html" class="nav-inicio">Inicio</a>
+    <nav>
+        <ul>
+            <li><a href="productos.html">Productos</a></li>
+            <li><a href="ubicacion.html">Ubicación</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+            <li>
+                <a href="https://www.instagram.com/deco_luminarias" target="_blank" aria-label="Síguenos en Instagram">
+                    <svg class="icon-instagram" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                    </svg>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+<main class="products-section">
+    <div class="products-header">
+        <h1 class="products-title">NUESTROS PRODUCTOS</h1>
+        
+        <div class="search-container">
+            <input type="text" id="searchInput" class="search-input" placeholder="Buscar por nombre, código o marca...">
+            <svg class="search-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M21.71 20.29l-5.01-5.01C17.54 13.68 18 11.91 18 10c0-4.41-3.59-8-8-8s-8 3.59-8 8 3.59 8 8 8c1.91 0 3.68-.46 5.28-1.3l5.01 5.01c.39.39 1.02.39 1.41 0 .39-.39.39-1.02.01-1.42zM10 16c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6z"/>
+            </svg>
+        </div>
+    </div>
+
+    <div class="products-grid" id="productsGrid">
+
+        <div class="product-card">
+            <div class="product-image-container">
+                <img src="https://ik.imagekit.io/ycyzylh36/prod_3.webp?tr=w-800,q-80" alt="CABLE ELECTRICO UNIPOLAR 2.5 MM NORMALIZADO X METRO ROJO ROJO">
+            </div>
+            <div class="product-info">
+                <span class="product-brand">STECK</span>
+                <h3 class="product-name">CABLE ELECTRICO UNIPOLAR 2.5 MM NORMALIZADO X METRO ROJO ROJO</h3>
+                <p class="product-price">$2800.00</p>
+                <p class="product-code">Codigo: PROD-8F40946B</p>
+                <a href="https://wa.me/5493549433565?text=Hola%20Deco%20%26%20Luminarias%21%0A%0AMe%20interesa%20este%20producto%3A%0A%F0%9F%92%A1%20CABLE%20ELECTRICO%20UNIPOLAR%202.5%20MM%20NORMALIZADO%20X%20METRO%20ROJO%20ROJO%0A%F0%9F%94%A2%20C%C3%B3digo%20PROD-8F40946B%0A%F0%9F%92%B0%20Precio%3A%20%242800.00%0A%0ALink%3A%20https%3A//luminariasdeco63-spec.github.io/catalogo-web/producto-prod-8f40946b.html" target="_blank" class="btn-consultar">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                    CONSULTAR
+                </a>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <div class="product-image-container">
+                <img src="https://ik.imagekit.io/ycyzylh36/prod_2.webp?tr=w-800,q-80" alt="LLAVE TERMICA BIPOLAR 2 X 25 - 3 KA CURVA C STECK 25 A 220 V BLANCO">
+            </div>
+            <div class="product-info">
+                <span class="product-brand">STECK</span>
+                <h3 class="product-name">LLAVE TERMICA BIPOLAR 2 X 25 - 3 KA CURVA C STECK 25 A 220 V BLANCO</h3>
+                <p class="product-price">$7280.00</p>
+                <p class="product-code">Codigo: PROD-4DF415C7</p>
+                <a href="https://wa.me/5493549433565?text=Hola%20Deco%20%26%20Luminarias%21%0A%0AMe%20interesa%20este%20producto%3A%0A%F0%9F%92%A1%20LLAVE%20TERMICA%20BIPOLAR%202%20X%2025%20-%203%20KA%20CURVA%20C%20STECK%2025%20A%20220%20V%20BLANCO%0A%F0%9F%94%A2%20C%C3%B3digo%20PROD-4DF415C7%0A%F0%9F%92%B0%20Precio%3A%20%247280.00%0A%0ALink%3A%20https%3A//luminariasdeco63-spec.github.io/catalogo-web/producto-prod-4df415c7.html" target="_blank" class="btn-consultar">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                    CONSULTAR
+                </a>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <div class="product-image-container">
+                <img src="https://via.placeholder.com/500x500?text=Sin+Imagen" alt="TEST">
+            </div>
+            <div class="product-info">
+                <span class="product-brand">TEST</span>
+                <h3 class="product-name">TEST</h3>
+                <p class="product-price">$140.00</p>
+                <p class="product-code">Codigo: PROD-05F8E5D5</p>
+                <a href="https://wa.me/5493549433565?text=Hola%20Deco%20%26%20Luminarias%21%0A%0AMe%20interesa%20este%20producto%3A%0A%F0%9F%92%A1%20TEST%0A%F0%9F%94%A2%20C%C3%B3digo%20PROD-05F8E5D5%0A%F0%9F%92%B0%20Precio%3A%20%24140.00%0A%0ALink%3A%20https%3A//luminariasdeco63-spec.github.io/catalogo-web/producto-prod-05f8e5d5.html" target="_blank" class="btn-consultar">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                    CONSULTAR
+                </a>
+            </div>
+        </div>
+
+    </div>
+</main>
+
+<footer>
+    <p>Contacto: <a>3549-433565</a></p>
+    <p>Ubicación: 3 de Febrero, Cruz del Eje, Córdoba.</p>
+    <p>&copy; 2026 Deco & Luminarias. Todos los derechos reservados.</p>
+</footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const searchInput = document.getElementById('searchInput');
+        const productCards = document.querySelectorAll('.product-card');
+
+        searchInput.addEventListener('input', (e) => {
+            const searchText = e.target.value.toLowerCase();
+
+            productCards.forEach(card => {
+                const productName = card.querySelector('.product-name').textContent.toLowerCase();
+                const productCode = card.querySelector('.product-code').textContent.toLowerCase();
+                const productBrand = card.querySelector('.product-brand').textContent.toLowerCase();
+
+                if (productName.includes(searchText) || productCode.includes(searchText) || productBrand.includes(searchText)) {
+                    card.style.display = 'flex'; 
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>

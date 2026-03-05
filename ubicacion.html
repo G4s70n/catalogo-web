@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>D&L Deco & Luminarias - Ubicación</title>
+<style>
+/* =========================================
+VARIABLES Y RESETEOS
+========================================= */
+:root {
+--bg-color: #0a0a0a;
+--text-color: #ffffff;
+--accent-color: #c48b5c;
+--text-muted: #888888;
+--nav-link-color: #b3b3b3;
+}
+
+* {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        line-height: 1.6;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+
+    h1, h2, h3, h4, h5, h6, .section-title, .products-title {
+        font-family: 'Georgia', serif;
+    }
+
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
+
+    /* =========================================
+       HEADER / NAVBAR (Diseño Minimalista)
+       ========================================= */
+    header {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 30px 60px;
+        background-color: rgba(0, 0, 0, 0.9);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        z-index: 50;
+    }
+
+    .nav-inicio {
+        color: var(--nav-link-color);
+        font-size: 11px;
+        font-weight: normal;
+        letter-spacing: 0.5px;
+        transition: color 0.3s ease;
+        display: flex;
+        align-items: center;
+    }
+
+    .nav-inicio:hover {
+        color: #ffffff;
+    }
+
+    nav ul {
+        list-style: none;
+        display: flex;
+        align-items: center;
+        gap: 25px;
+    }
+
+    nav ul li {
+        display: flex;
+        align-items: center;
+    }
+
+    nav ul li a {
+        color: var(--nav-link-color);
+        font-size: 11px;
+        letter-spacing: 0.5px;
+        transition: color 0.3s ease;
+        text-transform: none; /* Mantener estilo del segundo código */
+        display: flex;
+        align-items: center;
+    }
+
+    nav ul li a:hover {
+        color: #ffffff;
+    }
+
+    .icon-instagram {
+        width: 18px;
+        height: 18px;
+        fill: var(--nav-link-color);
+        transition: fill 0.3s ease;
+    }
+
+    .icon-instagram:hover {
+        fill: #ffffff;
+    }
+
+    /* =========================================
+       SECCIÓN UBICACIÓN
+       ========================================= */
+    #ubicacion-main {
+        padding: 80px 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+        flex-grow: 1;
+    }
+
+    .section-title {
+        text-align: center;
+        font-size: 32px;
+        color: var(--accent-color);
+        margin-bottom: 50px;
+        letter-spacing: 2px;
+        font-weight: 400;
+    }
+
+    .ubicacion-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 40px;
+        align-items: stretch;
+    }
+
+    .map-wrapper {
+        flex: 1 1 600px;
+        min-height: 450px;
+        border: 1px solid #333;
+        border-radius: 4px;
+        overflow: hidden;
+    }
+
+    .map-wrapper iframe {
+        width: 100%;
+        height: 100%;
+        border: 0;
+        filter: grayscale(1) invert(0.92) contrast(1.2); 
+    }
+
+    .info-wrapper {
+        flex: 1 1 350px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background-color: #111;
+        padding: 40px;
+        border-radius: 4px;
+        border: 1px solid #222;
+    }
+
+    .info-wrapper h3 {
+        font-size: 1.8rem;
+        color: var(--accent-color);
+        margin-top: 0;
+        margin-bottom: 20px;
+        font-weight: 400;
+    }
+
+    .info-wrapper p {
+        color: var(--text-muted);
+        margin-bottom: 10px;
+        font-size: 14px;
+    }
+
+    .info-wrapper p strong {
+        color: var(--text-color);
+    }
+
+    .navigation-buttons {
+        margin-top: 30px;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 15px;
+        border: 1px solid var(--accent-color);
+        color: var(--accent-color);
+        border-radius: 0px; /* Estilo más cuadrado como el botón del home */
+        font-weight: 600;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        background: transparent;
+    }
+
+    .btn:hover {
+        background-color: var(--accent-color);
+        color: #ffffff;
+    }
+
+    /* =========================================
+       FOOTER
+       ========================================= */
+    footer {
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.4);
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        padding: 30px 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        margin-top: auto;
+        z-index: 30;
+    }
+
+    footer p {
+        margin: 0;
+        color: #888888;
+        font-size: 10px;
+        letter-spacing: 0.5px;
+        text-align: center;
+        font-family: 'Arial', sans-serif;
+    }
+
+    footer a {
+        color: #c48b5c;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    footer a:hover {
+        color: #ffffff;
+    }
+
+    /* =========================================
+       RESPONSIVIDAD
+       ========================================= */
+    @media (max-width: 768px) {
+        header {
+            flex-direction: row;
+            justify-content: center;
+            padding: 20px 10px;
+            gap: 15px;
+        }
+
+        nav ul {
+            gap: 15px;
+        }
+
+        .section-title {
+            font-size: 26px;
+        }
+
+        .ubicacion-container {
+            flex-direction: column;
+        }
+
+        .map-wrapper {
+            min-height: 300px;
+        }
+    }
+</style>
+</head>
+<body>
+
+<header>
+    <a href="index.html" class="nav-inicio">Inicio</a>
+    <nav>
+        <ul>
+            <li><a href="productos.html">Productos</a></li>
+            <li><a href="ubicacion.html">Ubicación</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+            <li>
+                <a href="https://www.instagram.com/deco_luminarias" target="_blank" aria-label="Síguenos en Instagram">
+                    <svg class="icon-instagram" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                    </svg>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+<main id="ubicacion-main">
+    <h2 class="section-title">Encuéntranos</h2>
+    
+    <div class="ubicacion-container">
+        <div class="map-wrapper">
+            <iframe 
+                src="https://maps.google.com/maps?q=-30.723739436904346,-64.80261124111357&hl=es&z=16&output=embed" 
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+
+        <div class="info-wrapper">
+            <h3>Deco & Luminarias</h3>
+            <p><strong>Showroom Cruz del Eje</strong><br>
+            Provincia de Córdoba, Argentina</p>
+            <br>
+            <p><strong>Horarios de Atención</strong><br>
+            Lunes a Viernes: 09:00 - 13:00 hs | 17:30 - 21:30 hs<br>
+            Sábados: 09:00 - 13:00 hs</p>
+
+            <div class="navigation-buttons">
+                <a href="https://maps.google.com/?q=-30.723739436904346,-64.80261124111357" target="_blank" class="btn">
+                    Abrir en Google Maps
+                </a>
+                <a href="https://waze.com/ul?ll=-30.723739436904346,-64.80261124111357&navigate=yes" target="_blank" class="btn">
+                    Abrir en Waze
+                </a>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <p>Contacto: <a>3549-433565</a></p>
+    <p>Ubicación: 3 de Febrero, Cruz del Eje, Córdoba.</p>
+    <p>© 2026 Deco & Luminarias. Todos los derechos reservados.</p>
+</footer>
+</body>
+</html>
