@@ -31,6 +31,7 @@ VARIABLES Y RESETEOS
         display: flex;
         flex-direction: column;
         min-height: 100vh;
+        overflow-x: hidden; /* Evita scroll horizontal por el efecto de luz */
     }
 
     h1, h2, h3, h4, h5, h6, .section-title, .products-title {
@@ -41,6 +42,22 @@ VARIABLES Y RESETEOS
         text-decoration: none;
         color: inherit;
     }
+
+    /* EFECTO DE ILUMINACIÓN DE FONDO (TOUCH-GLOW) */
+    .touch-glow {
+        position: fixed;
+        top: 0; left: 0;
+        width: 400px; height: 400px;
+        margin-top: -200px; margin-left: -200px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(196, 139, 92, 0.25) 0%, rgba(196, 139, 92, 0.05) 40%, rgba(0,0,0,0) 70%);
+        pointer-events: none;
+        z-index: 1;
+        opacity: 0;
+        transition: opacity 0.5s ease;
+        will-change: transform, opacity;
+    }
+    .touch-glow.active { opacity: 1; }
 
     /* =========================================
        HEADER / NAVBAR (Diseño Minimalista)
@@ -87,7 +104,7 @@ VARIABLES Y RESETEOS
         font-size: 11px;
         letter-spacing: 0.5px;
         transition: color 0.3s ease;
-        text-transform: none; /* Mantener estilo del segundo código */
+        text-transform: none; 
         display: flex;
         align-items: center;
     }
@@ -111,6 +128,8 @@ VARIABLES Y RESETEOS
        SECCIÓN UBICACIÓN
        ========================================= */
     #ubicacion-main {
+        position: relative;
+        z-index: 10; /* Asegura que el contenido esté sobre la luz */
         padding: 80px 20px;
         max-width: 1200px;
         margin: 0 auto;
@@ -191,7 +210,7 @@ VARIABLES Y RESETEOS
         padding: 15px;
         border: 1px solid var(--accent-color);
         color: var(--accent-color);
-        border-radius: 0px; /* Estilo más cuadrado como el botón del home */
+        border-radius: 0px; 
         font-weight: 600;
         font-size: 11px;
         text-transform: uppercase;
@@ -272,6 +291,8 @@ VARIABLES Y RESETEOS
 </head>
 <body>
 
+<div class="touch-glow" id="touchGlow"></div>
+
 <header>
     <a href="index.html" class="nav-inicio">Inicio</a>
     <nav>
@@ -329,5 +350,50 @@ VARIABLES Y RESETEOS
     <p>Ubicación: 3 de Febrero, Cruz del Eje, Córdoba.</p>
     <p>© 2026 Deco & Luminarias. Todos los derechos reservados.</p>
 </footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        /* ----- SCRIPTS DE EFECTO DE LUZ ----- */
+        const glow = document.getElementById('touchGlow');
+
+        function moveGlow(e) {
+            let x, y;
+            if (e.touches && e.touches.length > 0) {
+                x = e.touches[0].clientX;
+                y = e.touches[0].clientY;
+            } else {
+                x = e.clientX;
+                y = e.clientY;
+            }
+            requestAnimationFrame(() => {
+                glow.style.transform = `translate(${x}px, ${y}px)`;
+            });
+        }
+
+        // Eventos para Celulares (Touch)
+        document.addEventListener('touchstart', (e) => {
+            glow.classList.add('active');
+            moveGlow(e);
+        }, {passive: true});
+        
+        document.addEventListener('touchmove', (e) => {
+            moveGlow(e);
+        }, {passive: true});
+        
+        document.addEventListener('touchend', () => {
+            glow.classList.remove('active');
+        });
+
+        // Eventos para Computadoras (Mouse)
+        document.addEventListener('mousemove', (e) => {
+            glow.classList.add('active');
+            moveGlow(e);
+        });
+        
+        document.addEventListener('mouseleave', () => {
+            glow.classList.remove('active');
+        });
+    });
+</script>
 </body>
 </html>
