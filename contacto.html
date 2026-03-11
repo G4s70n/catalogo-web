@@ -7,236 +7,254 @@
 <link rel="icon" type="image/ico" href="favicon.ico">
 <style>
 /* =========================================
-VARIABLES Y RESETEOS
-========================================= */
-:root {
---bg-color: #0a0a0a;
---text-color: #ffffff;
---accent-color: #c48b5c;
---text-muted: #888888;
---nav-link-color: #b3b3b3;
+   RESETEOS Y ESTILOS GLOBALES (Consistentes)
+   ========================================= */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Arial', sans-serif;
+    /* Degradado idéntico al Home y Productos */
+    background: radial-gradient(circle at 50% 35%, #352012 0%, #180c06 35%, #050302 65%, #000000 100%);
+    background-attachment: fixed;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    overflow-x: hidden;
 }
 
-* {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
+h1, h2, h3, h4, h5, h6, .section-title { font-family: 'Georgia', serif; }
 
-    body {
-        font-family: 'Arial', sans-serif; /* Fuente Principal */
-        background-color: var(--bg-color);
-        color: var(--text-color);
-        line-height: 1.6;
-        display: flex;
-        flex-direction: column;
-        min-height: 100vh;
-    }
+/* EFECTO DE ILUMINACIÓN DE FONDO */
+.touch-glow {
+    position: fixed;
+    top: 0; left: 0;
+    width: 400px; height: 400px;
+    margin-top: -200px; margin-left: -200px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(196, 139, 92, 0.25) 0%, rgba(196, 139, 92, 0.05) 40%, rgba(0,0,0,0) 70%);
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    will-change: transform, opacity;
+}
+.touch-glow.active { opacity: 1; }
 
-    h1, h2, h3, h4, h5, h6, .section-title, .products-title {
-        font-family: 'Georgia', serif; /* Fuente para Títulos */
-    }
+/* =========================================
+   HEADER / NAVBAR (Estilo Unificado)
+   ========================================= */
+header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 60px;
+    z-index: 50;
+}
 
-    a {
-        text-decoration: none;
-        color: inherit;
-    }
+.nav-inicio {
+    color: #b3b3b3;
+    text-decoration: none;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+    transition: color 0.3s ease;
+    display: flex;
+    align-items: center;
+}
 
-    /* =========================================
-       HEADER / NAVBAR
-       ========================================= */
+.nav-inicio:hover { color: #ffffff; }
+
+nav ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+nav ul li a {
+    color: #b3b3b3;
+    text-decoration: none;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+    transition: color 0.3s ease;
+}
+
+nav ul li a:hover { color: #ffffff; }
+
+.icon-instagram {
+    width: 18px;
+    height: 18px;
+    fill: #b3b3b3;
+    transition: fill 0.3s ease;
+}
+
+.icon-instagram:hover { fill: #ffffff; }
+
+/* =========================================
+   SECCIÓN CONTACTO
+   ========================================= */
+#contacto-main {
+    position: relative;
+    z-index: 10;
+    padding: 120px 20px 40px 20px; /* Padding superior para evitar el header absoluto */
+    max-width: 1000px;
+    margin: 0 auto;
+    flex-grow: 1;
+    width: 100%;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 32px;
+    color: #c48b5c;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+    font-weight: 400;
+}
+
+.section-subtitle {
+    text-align: center;
+    font-size: 14px;
+    color: #888888;
+    margin-bottom: 60px;
+    letter-spacing: 1px;
+}
+
+.contacto-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.contacto-card {
+    background-color: #1a1a1a;
+    padding: 40px;
+    border: 1px solid #333;
+    border-radius: 12px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.contacto-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+    border-color: #4a3b2c;
+}
+
+.contacto-card h3 {
+    font-size: 20px;
+    color: #ffffff;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+}
+
+.contacto-card p {
+    font-size: 13px;
+    color: #888888;
+    margin-bottom: 25px;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 12px;
+    background-color: transparent;
+    border: 1px solid #c48b5c;
+    color: #c48b5c;
+    font-weight: 600;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #c48b5c;
+    color: #ffffff;
+}
+
+.btn svg {
+    width: 16px;
+    height: 16px;
+    margin-right: 10px;
+    fill: currentColor;
+}
+
+/* =========================================
+   FOOTER
+   ========================================= */
+footer {
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-top: auto;
+    z-index: 30;
+}
+
+footer p {
+    margin: 0;
+    color: #888888;
+    font-size: 10px;
+    letter-spacing: 0.5px;
+    text-align: center;
+}
+
+footer a {
+    color: #c48b5c;
+    transition: color 0.3s ease;
+}
+
+footer a:hover { color: #ffffff; }
+
+/* =========================================
+   RESPONSIVIDAD (Corrección de Navbar Mobile)
+   ========================================= */
+@media (max-width: 768px) {
     header {
+        position: relative; 
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 20px 10px 10px 10px;
+        gap: 15px;
         width: 100%;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 30px 60px;
-        background-color: rgba(0, 0, 0, 0.9);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        z-index: 50;
     }
-
-    .nav-inicio {
-        color: var(--nav-link-color);
-        font-size: 11px;
-        font-weight: normal;
-        letter-spacing: 0.5px;
-        transition: color 0.3s ease;
-        display: flex;
-        align-items: center;
-    }
-
-    .nav-inicio:hover { color: #ffffff; }
 
     nav ul {
-        list-style: none;
-        display: flex;
-        align-items: center;
-        gap: 25px;
-    }
-
-    nav ul li {
-        display: flex;
-        align-items: center;
-    }
-
-    nav ul li a {
-        color: var(--nav-link-color);
-        font-size: 11px;
-        letter-spacing: 0.5px;
-        transition: color 0.3s ease;
-        display: flex;
-        align-items: center;
-    }
-
-    nav ul li a:hover { color: #ffffff; }
-
-    .icon-instagram {
-        width: 18px;
-        height: 18px;
-        fill: var(--nav-link-color);
-        transition: fill 0.3s ease;
-    }
-
-    .icon-instagram:hover { fill: #ffffff; }
-
-    /* =========================================
-       SECCIÓN CONTACTO
-       ========================================= */
-    #contacto-main {
-        padding: 80px 20px;
-        max-width: 1000px;
-        margin: 0 auto;
-        flex-grow: 1;
-        width: 100%;
-    }
-
-    .section-title {
-        text-align: center;
-        font-size: 32px;
-        color: var(--accent-color);
-        margin-bottom: 20px;
-        letter-spacing: 2px;
-        font-weight: 400;
-    }
-
-    .section-subtitle {
-        text-align: center;
-        font-family: 'Arial', sans-serif;
-        font-size: 14px;
-        color: var(--text-muted);
-        margin-bottom: 60px;
-        letter-spacing: 1px;
-    }
-
-    .contacto-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 30px;
-    }
-
-    .contacto-card {
-        background-color: #111;
-        padding: 40px;
-        border: 1px solid #222;
-        border-radius: 4px;
-        text-align: center;
-        transition: border-color 0.3s ease;
-    }
-
-    .contacto-card:hover {
-        border-color: var(--accent-color);
-    }
-
-    .contacto-card h3 {
-        font-size: 20px;
-        color: #ffffff;
-        margin-bottom: 15px;
-        letter-spacing: 1px;
-    }
-
-    .contacto-card p {
-        font-family: 'Arial', sans-serif;
-        font-size: 13px;
-        color: var(--text-muted);
-        margin-bottom: 25px;
-    }
-
-    /* Botones de Contacto */
-    .btn {
-        display: inline-flex;
-        align-items: center;
         justify-content: center;
-        width: 100%;
-        padding: 15px;
-        border: 1px solid var(--accent-color);
-        color: var(--accent-color);
-        font-family: 'Arial', sans-serif;
-        font-weight: 600;
-        font-size: 11px;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        transition: all 0.3s ease;
-        background: transparent;
-        margin-bottom: 10px;
+        flex-wrap: nowrap;
+        gap: 15px;
     }
 
-    .btn:hover {
-        background-color: var(--accent-color);
-        color: #ffffff;
+    .nav-inicio, nav ul li a {
+        white-space: nowrap;
     }
 
-    .btn svg {
-        width: 16px;
-        height: 16px;
-        margin-right: 10px;
-        fill: currentColor;
+    #contacto-main {
+        padding-top: 40px;
     }
 
-    /* =========================================
-       FOOTER
-       ========================================= */
-    footer {
-        width: 100%;
-        background-color: rgba(0, 0, 0, 0.4);
-        border-top: 1px solid rgba(255, 255, 255, 0.05);
-        padding: 30px 20px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
-        margin-top: auto;
-        z-index: 30;
-    }
-
-    footer p {
-        margin: 0;
-        color: #888888;
-        font-size: 10px;
-        letter-spacing: 0.5px;
-        text-align: center;
-        font-family: 'Arial', sans-serif;
-    }
-
-    footer a {
-        color: #c48b5c;
-        text-decoration: none;
-        transition: color 0.3s ease;
-    }
-
-    footer a:hover { color: #ffffff; }
-
-    /* =========================================
-       RESPONSIVIDAD
-       ========================================= */
-    @media (max-width: 768px) {
-        header { padding: 20px; }
-        nav ul { gap: 15px; }
-        .section-title { font-size: 26px; }
-    }
+    .section-title { font-size: 26px; }
+}
 </style>
 </head>
 <body>
+
+<div class="touch-glow" id="touchGlow"></div>
 
 <header>
     <a href="index.html" class="nav-inicio">Inicio</a>
@@ -281,9 +299,43 @@ VARIABLES Y RESETEOS
 </main>
 
 <footer>
-    <p>Contacto: <a>3549-433565</a></p>
+    <p>Contacto: <a href="tel:3549433565">3549-433565</a></p>
     <p>Ubicación: 3 de Febrero, Cruz del Eje, Córdoba.</p>
     <p>&copy; 2026 Deco & Luminarias. Todos los derechos reservados.</p>
 </footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        /* ----- SCRIPTS DE EFECTO DE LUZ ----- */
+        const glow = document.getElementById('touchGlow');
+
+        function moveGlow(e) {
+            let x, y;
+            if (e.touches && e.touches.length > 0) {
+                x = e.touches[0].clientX;
+                y = e.touches[0].clientY;
+            } else {
+                x = e.clientX;
+                y = e.clientY;
+            }
+            requestAnimationFrame(() => {
+                glow.style.transform = `translate(${x}px, ${y}px)`;
+            });
+        }
+
+        document.addEventListener('touchstart', (e) => {
+            glow.classList.add('active');
+            moveGlow(e);
+        }, {passive: true});
+        
+        document.addEventListener('touchmove', (e) => moveGlow(e), {passive: true});
+        document.addEventListener('touchend', () => glow.classList.remove('active'));
+        document.addEventListener('mousemove', (e) => {
+            glow.classList.add('active');
+            moveGlow(e);
+        });
+        document.addEventListener('mouseleave', () => glow.classList.remove('active'));
+    });
+</script>
 </body>
 </html>
