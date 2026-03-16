@@ -7,7 +7,7 @@
 <link rel="icon" type="image/ico" href="assets/favicon/favicon.ico">
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { background: radial-gradient(circle at 50% 35%, #352012 0%, #180c06 35%, #050302 65%, #000000 100%); background-attachment: fixed; color: #ffffff; font-family: 'Arial', sans-serif; overflow-x: hidden; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+body { background: radial-gradient(circle at 50% 35%, #352012 0%, #180c06 35%, #050302 65%, #000000 100%); background-attachment: fixed; color: #ffffff; font-family: 'Arial', sans-serif; overflow-x: hidden; max-width: 100vw; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
 h1, h2, h3, h4, h5, h6, .section-title, .products-title { font-family: 'Georgia', serif; }
 /* EFECTO DE ILUMINACIÓN DE FONDO (TOUCH-GLOW) */
 .touch-glow { position: fixed; top: 0; left: 0; width: 400px; height: 400px; margin-top: -200px; margin-left: -200px; border-radius: 50%; background: radial-gradient(circle, rgba(196, 139, 92, 0.25) 0%, rgba(196, 139, 92, 0.05) 40%, rgba(0,0,0,0) 70%); pointer-events: none; z-index: 1; opacity: 0; transition: opacity 0.5s ease; will-change: transform, opacity; }
@@ -59,6 +59,18 @@ nav ul li a:hover { color: #ffffff; }
 .btn-whatsapp { background-color: #25D366; color: #ffffff; border: none; border-radius: 6px; padding: 15px 30px; font-size: 14px; font-weight: bold; letter-spacing: 1px; cursor: pointer; display: flex; align-items: center; gap: 10px; transition: opacity 0.3s ease, transform 0.2s ease; text-decoration: none; width: 100%; max-width: 350px; justify-content: center;}
 .btn-whatsapp:hover { opacity: 0.9; transform: translateY(-2px); }
 .btn-whatsapp svg { width: 20px; height: 20px; fill: currentColor; }
+
+/* Modal Custom */
+.custom-modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 9999; justify-content: center; align-items: center; backdrop-filter: blur(5px); }
+.custom-modal { background: #1a1a1a; border: 1px solid #333; padding: 30px; border-radius: 12px; width: 90%; max-width: 400px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.8); }
+.custom-modal h3 { color: #fff; margin-bottom: 10px; font-family: 'Georgia', serif; letter-spacing: 1px; }
+.custom-modal p { color: #888; font-size: 14px; margin-bottom: 25px; }
+.custom-modal-actions { display: flex; gap: 15px; justify-content: center; }
+.custom-modal-btn { padding: 10px 20px; border-radius: 6px; cursor: pointer; border: none; font-weight: bold; transition: 0.3s; font-size: 12px; letter-spacing: 1px; }
+.btn-cancelar { background: transparent; border: 1px solid #444; color: #b3b3b3; }
+.btn-cancelar:hover { color: #fff; border-color: #888; }
+.btn-confirmar { background: #ff5555; color: #fff; }
+.btn-confirmar:hover { background: #ff3333; }
 
 footer { width: 100%; background-color: rgba(0, 0, 0, 0.4); border-top: 1px solid rgba(255, 255, 255, 0.05); padding: 30px 20px; display: flex; flex-direction: column; align-items: center; gap: 10px; margin-top: auto; z-index: 30; }
 footer p { margin: 0; color: #888888; font-size: 10px; text-align: center; font-family: 'Arial', sans-serif; }
@@ -118,7 +130,7 @@ footer a:hover { color: #ffffff; }
 <main class="cart-section">
     <div class="cart-header">
         <h1 class="cart-title">TU CARRITO</h1>
-        <button class="btn-vaciar" onclick="clearCart()" id="btnVaciar">Vaciar Carrito</button>
+        <button class="btn-vaciar" onclick="showModal()" id="btnVaciar">Vaciar Carrito</button>
     </div>
 
     <div class="cart-empty" id="cartEmptyMessage">
@@ -137,6 +149,18 @@ footer a:hover { color: #ffffff; }
         <p style="font-size: 11px; color: #888;">Serás redirigido a WhatsApp para enviar el carrito a un asesor.</p>
     </div>
 </main>
+
+<!-- Modal de Confirmación -->
+<div class="custom-modal-overlay" id="clearModal">
+    <div class="custom-modal">
+        <h3>VACIAR CARRITO</h3>
+        <p>¿Estás seguro de que quieres eliminar todos los productos?</p>
+        <div class="custom-modal-actions">
+            <button class="custom-modal-btn btn-cancelar" onclick="hideModal()">CANCELAR</button>
+            <button class="custom-modal-btn btn-confirmar" onclick="clearCart()">SÍ, VACIAR</button>
+        </div>
+    </div>
+</div>
 
 <footer>
     <p>Contacto: <a>3549-433565</a></p>
@@ -178,6 +202,7 @@ footer a:hover { color: #ffffff; }
         let cart = loadCart();
         cart = cart.filter(p => p.codigo !== codigo);
         saveCart(cart);
+        renderCartItems(); // Faltaba re-dibujar
     }
 
     function updateQuantity(codigo, delta) {
@@ -210,11 +235,18 @@ footer a:hover { color: #ffffff; }
         document.getElementById('cartTotal').innerText = '$' + total.toLocaleString('es-AR');
     }
 
+    function showModal() {
+        document.getElementById('clearModal').style.display = 'flex';
+    }
+
+    function hideModal() {
+        document.getElementById('clearModal').style.display = 'none';
+    }
+
     function clearCart() {
-        if(confirm('¿Estás seguro de que quieres vaciar el carrito?')) {
-            localStorage.removeItem('cart');
-            renderCartItems();
-        }
+        localStorage.removeItem('cart');
+        hideModal();
+        renderCartItems();
     }
 
     function renderCartItems() {
@@ -259,9 +291,9 @@ footer a:hover { color: #ffffff; }
                 <div class="item-controls-wrapper">
                     <div class="item-quantity">
                         <span class="qty-label">Cantidad U.</span>
-                        <button class="qty-btn" onmousedown="startUpdate(event, '${item.codigo}', -1)" onmouseup="stopUpdate()" onmouseleave="stopUpdate()" ontouchstart="startUpdate(event, '${item.codigo}', -1)" ontouchend="stopUpdate()">-</button>
+                        <button class="qty-btn" type="button" onclick="updateQuantity('${item.codigo}', -1)">-</button>
                         <span class="qty-display" id="qty-${item.codigo}">${item.cantidad}</span>
-                        <button class="qty-btn" onmousedown="startUpdate(event, '${item.codigo}', 1)" onmouseup="stopUpdate()" onmouseleave="stopUpdate()" ontouchstart="startUpdate(event, '${item.codigo}', 1)" ontouchend="stopUpdate()">+</button>
+                        <button class="qty-btn" type="button" onclick="updateQuantity('${item.codigo}', 1)">+</button>
                     </div>
                 </div>
                 <div class="item-price desktop-subtotal subtotal-${item.codigo}">$${subtotal.toLocaleString('es-AR')}</div>
